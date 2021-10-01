@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<style>
+div {
+   display: flex;
+   margin: 4%;
+   padding: 2%;
+   box-shadow: inset 0 0 12px blue;
+}
+p {
+   font-family: "Courier Monospace";
+   font-size: 2em;
+   color: red;
+}
+p:last-of-type {
+   animation: type 0.33s infinite;
+}
+@keyframes type{
+   to { opacity: .0; }
+}
+</style>
+<body>
+<div>
+<p id="text"></p>
+<p>|</p>
+</div>
+<script>
+const words = ["This is", "Typing Effect", "YOU CAN ", "Add to", "your site"];
+let i = 0;
+let counter;
+function typeNow() {
+   let word = words[i].split("");
+   var loopTyping = function() {
+      if (word.length > 0) {
+         document.getElementById('text').innerHTML += word.shift();
+      } else {
+         deleteNow();
+         return false;
+      };
+      counter = setTimeout(loopTyping, 200);
+   };
+   loopTyping();
+};
+function deleteNow() {
+   let word = words[i].split("");
+   var loopDeleting = function() {
+      if (word.length > 0) {
+         word.pop();
+         document.getElementById('text').innerHTML = word.join("");
+      } else {
+         if (words.length > (i + 1)) {
+            i++;
+         }
+         else {
+            i = 0;
+         };
+         typeNow();
+         return false;
+      };
+      counter = setTimeout(loopDeleting, 200);
+   };
+   loopDeleting();
+};
+typeNow();
+</script>
+</body>
+</html>
